@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+
+    <head>
+        <title>TeacherTrax</title>
+    </head>
+
+    <body>
+        <h1>Teachers</h1>
+        Find a teacher. See their status <strong>{{ boldmessage }}</strong><br />
+        <img src="{% static 'images/mki-teacher.jpg' %}" alt="MKI, teacher of teachers"/><br />
+        <a href="/teachertrax/">Home</a><br />
+        <a href="/teachertrax/courses/">Courses</a><br />
+        
+    </body>
+
+</html>

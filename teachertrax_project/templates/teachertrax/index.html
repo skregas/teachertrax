@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+
+    <head>
+        <title>TeacherTrax</title>
+    </head>
+
+    <body>
+        <h1>Welcome to the home page!</h1>
+        hello teacher! <strong>{{ boldmessage }}</strong><br />
+        <img src="{% static 'images/path-of-joy.jpg' %}" alt="The Bright Path, the path of joy"/><br />
+        <a href="/teachertrax/teachers/">Teachers</a><br />
+        <a href="/teachertrax/courses/">Courses</a><br />
+        
+    </body>
+
+</html>
