@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-def home(request):
+def index(request):
 	content ='<a href="teachers">Teachers</a> <br />'
 	content +='<a href="courses">Courses</a> <br />'
 	content += "This is the Home Page"
