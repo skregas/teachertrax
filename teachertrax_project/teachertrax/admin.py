@@ -7,7 +7,13 @@ class TeacherAdmin(admin.ModelAdmin):
     list_filter = ('name', 'city', 'is_available_for_invitation')
     
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('city', 'date')
+    list_display = ('city', 'date', 'TEACHERS')
+    list_filter = ('city', 'date') 
+    
+    
+    def TEACHERS(self, obj):
+        return ", ".join([t.name for t in obj.teachers.all()])
+        
     
 admin.site.register(Teacher, TeacherAdmin)
 admin.site.register(Course, CourseAdmin)
