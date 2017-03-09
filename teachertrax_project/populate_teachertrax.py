@@ -45,7 +45,6 @@ def add_teacher(name, city, is_available):
     t = Teacher.objects.get_or_create(name=name, 
                                       city=city,
                                       is_available_for_invitation = is_available)[0]
-    # t.is_available_for_invitation = is_available
     t.save()
     return t
 
