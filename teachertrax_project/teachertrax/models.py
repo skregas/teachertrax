@@ -15,8 +15,9 @@ class Teacher(models.Model):
             self.slug = slugify(self.name)
         self.slug = slugify(self.name)
         super(Teacher, self).save(*args, **kwargs)
-        
-    def get_latest_home_course(self):
+    
+    @property
+    def last_home_course(self):
         # Return the most recent course taught in the teacher's 
         # home city
         last_home_course = Course.objects.filter(
@@ -24,15 +25,21 @@ class Teacher(models.Model):
                                             order_by('date').
                                             last()
         return last_home_course
-    
-    last_home_course = property(get_latest_home_course)
-    
-    def get_other_teacher(self, course):
+ 
+    @property
+    def last_away_course(self):
+        # Return the most recent course where this teacher was the visitor
+        last_away_course = Course.objects.exclude(
+                                            city=self.city).
+                                            order_by('date').
+                                            last()
+        return last_away_course
+        
+    @property
+    def other_teacher(self, course):
         # Returns the name of the other teacher for a given course.
         other_teacher = course.teachers.exclude(name=self.name)
         return other_teacher
-        
-    other_teacher = property(get_fellow_teacher)
     
     def __str__(self):
         return self.name
