@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+
+    <head>
+        <title>TeacherTrax</title>
+    </head>
+
+    <body>
+        <h1>Teacher: {{ teacher.name }}</h1>
+        
+        <img src="{% static 'images/{{ teacher.slug }}.jpg' %}" alt="{{ teacher.name }}, {{ teacher.city }}"/><br />
+        <p> Available to teach?
+        {% if teacher.is_available_for_invitation %}
+            Yes, invite me!
+        {% else %}
+            No, I owe someone a class
+        {% endif %}
+        </p>
+        {% if courses %}
+            <ul>
+                {% for course in courses %}
+                <li>{{ course.city }}  {{ course.date }} </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>There are no courses present.</strong>
+        {% endif %}
+        <a href="/teachertrax/">Home</a><br />
+        <a href="/teachertrax/teachers">Teachers</a><br 
+        <a href="/teachertrax/courses/">Courses</a><br />
+        
+    </body>
+
+</html>

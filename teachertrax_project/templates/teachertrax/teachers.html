@@ -10,6 +10,15 @@
         <h1>Teachers</h1>
         Find a teacher. See their status <strong>{{ boldmessage }}</strong><br />
         <img src="{% static 'images/mki-teacher.jpg' %}" alt="MKI, teacher of teachers"/><br />
+        {% if teachers %}
+            <ul>
+                {% for teacher in teachers %}
+                <li><a href="/teachertrax/teacher/{{ teacher.slug }}">{{ teacher.name }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>There are no teachers present.</strong>
+        {% endif %}
         <a href="/teachertrax/">Home</a><br />
         <a href="/teachertrax/courses/">Courses</a><br />
         

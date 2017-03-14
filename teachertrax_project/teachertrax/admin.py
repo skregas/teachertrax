@@ -5,6 +5,7 @@ from teachertrax.models import Teacher, Course
 class TeacherAdmin(admin.ModelAdmin):
     list_display = ('name', 'city', 'is_available_for_invitation')
     list_filter = ('name', 'city', 'is_available_for_invitation')
+    prepopulated_fields = {'slug':('name',)}
     
 class CourseAdmin(admin.ModelAdmin):
     list_display = ('city', 'date', 'TEACHERS')
