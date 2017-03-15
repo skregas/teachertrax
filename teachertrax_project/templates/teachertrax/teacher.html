@@ -14,7 +14,7 @@
         {% if teacher.is_available_for_invitation %}
             Yes, invite me!
         {% else %}
-            No, I owe someone a class
+            No, I need to teach with {{ teacher.other_teacher }}
         {% endif %}
         </p>
         {% if courses %}
