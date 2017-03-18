@@ -14,7 +14,7 @@
         {% if teacher.is_available_for_invitation %}
             Yes, invite me!
         {% else %}
-            No, I need to teach with {{ teacher.other_teacher }}
+            No, I need to teach with {{ fellow_teacher }}
         {% endif %}
         </p>
         {% if courses %}
@@ -24,10 +24,10 @@
                 {% endfor %}
             </ul>
         {% else %}
-            <strong>There are no courses present.</strong>
+            <p><strong>There are no courses present.</strong></p>
         {% endif %}
         <a href="/teachertrax/">Home</a><br />
-        <a href="/teachertrax/teachers">Teachers</a><br 
+        <a href="/teachertrax/teachers">Teachers</a><br />
         <a href="/teachertrax/courses/">Courses</a><br />
         
     </body>
