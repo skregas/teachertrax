@@ -2,6 +2,8 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.core.exceptions import ObjectDoesNotExist
 
+import datetime
+
 # Create your models here.
 class TeacherManager(models.Manager):
     # Custom manager for the Teacher class
@@ -36,8 +38,9 @@ class Teacher(models.Model):
     
     @property
     def last_course(self):
-        # Return the last course
-        last_course = Course.objects.all().order_by('date').last()
+        # Return the last course taught.
+        # Exclude any course in the future
+        last_course = Course.objects.exclude(date__gt=datetime.date.today()).order_by('date').last()
         return last_course
         
     @property

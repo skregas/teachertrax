@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Teachertrax - Add a teacher</title>
+        <title>Teachertrax - Add a Course</title>
     </head>
 
     <body>
-        <h1>Add a Teacher</h1>
+        <h1>Add a Course</h1>
 
-        <form id="teacher_form" method="post" action="/teachertrax/teachers/add_teacher/">
+        <form id="course_form" method="post" action="/teachertrax/courses/add_course/">
 
             {% csrf_token %}
             {% for hidden in form.hidden_fields %}
@@ -16,13 +16,14 @@
 
             {% for field in form.visible_fields %}
                 {{ field.errors }}
-                {{ field.help_text }}
+                {{ field.label }}
                 <p>{{ field }}</p>
             {% endfor %}
 
-            <input type="submit" name="submit" value="Create Teacher" />
+            <input type="submit" name="submit" value="Create Course" /><br />
         </form>
-        <a href="/teachertrax/teachers/">Back</a>
+        <a href="/teachertrax/courses/">Back</a>
     </body>
 
+    
 </html>

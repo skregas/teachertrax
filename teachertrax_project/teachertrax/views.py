@@ -17,7 +17,7 @@ def index(request):
 def teachers(request):
     context = {}
     t = 'teachertrax/teachers.html'
-    teachers_list = Teacher.objects.order_by('-name')
+    teachers_list = Teacher.objects.order_by('name')
     context['teachers'] = teachers_list
     # Return a rendered response to send to the client.
     # We make use of the shortcut function to make our lives easier.
@@ -43,7 +43,6 @@ def teacher(request, teacher_name_slug):
     return render(request, t, context)
     
 def add_teacher(request):
-    print("{0} ENTERED THE add_teacher VIEW {0}".format('*'*5))
     if request.method == 'POST':
         form = TeacherForm(request.POST)
         if form.is_valid():
@@ -70,3 +69,20 @@ def courses(request):
     # Note that the first parameter is the template we wish to use.
     return render(request, t, context)
 
+def add_course(request):
+    if request.method == 'POST':
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            c = form.save(commit=True)
+            # redirect to the teacher list page
+            print(c, c.city, c.date)
+            return courses(request)
+        else:
+            #errors
+            print(form.errors)
+    else:
+        # request == 'GET'
+        form = CourseForm()
+        
+    # render all the things!
+    return render(request, 'teachertrax/add_course.html', {'form': form})

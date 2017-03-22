@@ -13,9 +13,15 @@ class TeacherForm(forms.ModelForm):
  
 class CourseForm(forms.ModelForm):
     city = forms.CharField(max_length=50, label="Course location:",help_text="Please enter the course location")
-    date = forms.DateField(label="Course date:", widget=forms.SelectDateWidget(
+    date = forms.DateField(help_text="Please enter the date of the course:", label="Course date:", widget=forms.SelectDateWidget(
         empty_label=("Select Year", "Select Month", "Select Day")))
-    teachers = forms.ModelMultipleChoiceField(queryset=Teacher.objects.all(), to_field_name='name', label="Select the teachers of the course")
+    teachers = forms.ModelMultipleChoiceField(queryset=Teacher.objects.all(), to_field_name='name', help_text="Select 2 teachers for the course", label="Select 2 teachers for the course")
+    
+    def clean_teachers(self):
+        num_of_teachers = self.cleaned_data['teachers']
+        if len(num_of_teachers) > 2:
+            raise forms.ValidationError("Please select only 2 teachers for the course")
+        return num_of_teachers
     
     class Meta:
         model = Course
