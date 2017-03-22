@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+
 from teachertrax.models import Teacher, Course
+from teachertrax.forms import TeacherForm, CourseForm
 
 def index(request):
     # Construct a dictionary to pass to the template engine as its context.
@@ -39,6 +41,24 @@ def teacher(request, teacher_name_slug):
    
     context['courses'] = courses
     return render(request, t, context)
+    
+def add_teacher(request):
+    print("{0} ENTERED THE add_teacher VIEW {0}".format('*'*5))
+    if request.method == 'POST':
+        form = TeacherForm(request.POST)
+        if form.is_valid():
+            t = form.save(commit=True)
+            # redirect to the teacher list page
+            return teachers(request)
+        else:
+            #errors
+            print(form.errors)
+    else:
+        # request == 'GET'
+        form = TeacherForm()
+        
+    # render all the things!
+    return render(request, 'teachertrax/add_teacher.html', {'form': form})
     
 def courses(request):
     context = {}
