@@ -30,6 +30,9 @@ def teacher(request, teacher_name_slug):
     teacher = Teacher.objects.get(slug=teacher_name_slug)
     context['teacher'] = teacher
     
+    fellow_teacher = teacher.other_teacher(teacher.last_course)
+    context['fellow_teacher'] = fellow_teacher
+    
     # Get all the courses for the current teacher
     courses = Course.objects.filter(
                                 teachers__name__contains=teacher.name).order_by('date')
